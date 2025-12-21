@@ -1,0 +1,12 @@
+<nav class="navbar navbar-dark bg-dark px-4">
+  <a class="navbar-brand" routerLink="/">ShopIn</a>
+
+  <div class="d-flex gap-3">
+    <a routerLink="/products" class="btn btn-outline-light btn-sm">Products</a>
+    <a routerLink="/login" class="btn btn-outline-light btn-sm">Login</a>
+    <a routerLink="/signup" class="btn btn-outline-light btn-sm">Signup</a>
+    <a routerLink="/cart" class="btn btn-warning btn-sm">
+      Cart ({{ cart.count() }})
+    </a>
+  </div>
+</nav>
