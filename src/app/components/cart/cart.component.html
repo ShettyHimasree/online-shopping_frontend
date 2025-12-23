@@ -1,37 +1,16 @@
-<!-- cart.component.html -->
-<div class="cart-container" *ngIf="cartItems.length > 0; else emptyCart">
+<div *ngIf="!isLoggedIn">
+  <p>Please log in to view your cart.</p>
+</div>
+<div *ngIf="isLoggedIn">
   <h2>Your Cart</h2>
-
-  <div *ngFor="let item of cartItems" class="cart-item">
-    <img [src]="item.image" alt="{{ item.name }}">
-    <div class="cart-item-details">
-      <h3>{{ item.name }}</h3>
-      <p>{{ item.description }}</p>
-      <p class="item-price">${{ item.price }}</p>
-    </div>
-
-    <div class="cart-item-quantity">
-      <span>Quantity: {{ item.quantity }}</span>
-    </div>
-    
-    <button (click)="removeItem(item.id)">Remove</button>
+  <div *ngIf="cartItems.length === 0">
+    <p>Your cart is empty.</p>
   </div>
-
-  <div class="cart-total">
-    <h3>Total:</h3>
-    <div class="total-price">${{ cartTotal.toFixed(2) }}</div>
-  </div>
-
-  <div class="cart-actions">
-    <button class="btn-continue" (click)="continueShopping()">Continue Shopping</button>
-    <button class="btn-checkout" (click)="checkout()">Checkout</button>
+  <div *ngIf="cartItems.length > 0">
+    <ul>
+      <li *ngFor="let item of cartItems">
+        {{ item.name }} - {{ item.price }} USD x {{ item.quantity }}
+      </li>
+    </ul>
   </div>
 </div>
-
-<!-- Empty cart message -->
-<ng-template #emptyCart>
-  <div class="empty-cart">
-    <h3>Your cart is empty!</h3>
-    <button (click)="continueShopping()">Continue Shopping</button>
-  </div>
-</ng-template>
