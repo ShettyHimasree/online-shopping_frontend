@@ -1,0 +1,111 @@
+
+<!-- src/app/signup/signup.component.html -->
+
+
+<div class="signup-container">
+  <div class="card">
+    <div class="text-center">
+      <h1>Sign Up</h1>
+      <h6>Register Yourself !!</h6>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="signUp()" novalidate>
+      <!-- Full Name -->
+      <div class="mb-3 input-group">
+        <label for="fullname" class="form-label">Full Name</label>
+        <input
+          id="fullname"
+          type="text"
+          class="form-control"
+          formControlName="fullname"
+          placeholder="Enter your full name"
+          autocomplete="name"
+        />
+        @if (fullname?.invalid && fullname?.touched) {
+          <div class="form-text text-warning">
+            @if (fullname?.errors?.['required']) { <div>Name is required.</div> }
+            @if (fullname?.errors?.['minlength']) { <div>At least 2 characters.</div> }
+            @if (fullname?.errors?.['maxlength']) { <div>50 characters or less.</div> }
+            @if (fullname?.errors?.['pattern']) { <div>Letters, spaces, hyphens, apostrophes only.</div> }
+          </div>
+        }
+      </div>
+
+      <!-- Mobile -->
+      <div class="mb-3 input-group">
+        <label for="mobile" class="form-label">Mobile Number</label>
+        <input
+          id="mobile"
+          type="tel"
+          class="form-control"
+          formControlName="mobile"
+          placeholder="10-digit mobile number"
+          autocomplete="tel"
+        />
+        @if (mobile?.invalid && mobile?.touched) {
+          <div class="form-text text-warning">
+            @if (mobile?.errors?.['required']) { <div>Mobile is required.</div> }
+            @if (mobile?.errors?.['pattern']) { <div>Enter a valid 10-digit number.</div> }
+          </div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3 input-group">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+        />
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        @if (email?.invalid && email?.touched) {
+          <div class="form-text text-warning">
+            @if (email?.errors?.['required']) { <div>Email is required.</div> }
+            @if (email?.errors?.['email']) { <div>Invalid email format.</div> }
+          </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3 input-group">
+        <label for="password" class="form-label">Password</label>
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Enter a strong password"
+          autocomplete="new-password"
+        />
+        @if (password?.invalid && password?.touched) {
+          <div class="form-text text-warning">
+            @if (password?.errors?.['required']) { <div>Password is required.</div> }
+            @if (password?.errors?.['minlength']) { <div>At least 8 characters.</div> }
+            @if (password?.errors?.['pattern']) {
+              <div>Use upper+lower+digit+special (e.g., Abcdef1!).</div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Messages -->
+      @if (error)   { <p class="error-message">{{ error }}</p> }
+      @if (success) { <p class="success-message">{{ success }}</p> }
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="btn btn-primary mb-2 primary-btn"
+        [disabled]="signupForm.invalid || isSubmitting"
+      >
+        @if (isSubmitting) { <span>Submitting…</span> } @else { <span>Sign Up</span> }
+      </button>
+    </form>
+
+    <a routerLink="/login">Already registered? Click to Login!!</a>
+  </div>
+</div>
