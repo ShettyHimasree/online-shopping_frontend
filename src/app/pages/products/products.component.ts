@@ -6,17 +6,10 @@ import { Product } from '../../models/product.model';
 
 @Component({
   standalone: true,
-  template: `
-<div class="container mt-4">
-  <div class="card mb-3" *ngFor="let p of products">
-    <div class="card-body">
-      <h5>{{p.name}}</h5>
-      <p>₹ {{p.price}}</p>
-      <a [routerLink]="['/product', p.id]" class="btn btn-sm btn-primary">View</a>
-    </div>
-  </div>
-</div>`,
-  imports: [CommonModule, RouterLink]
+  selector: 'app-products',
+  imports: [CommonModule, RouterLink],
+  templateUrl: './products.component.html',
+  styleUrls: ['./ products.component.css']
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
@@ -25,5 +18,9 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.ps.getProducts();
+  }
+
+  trackById(index: number, item: Product) {
+    return item.id;
   }
 }

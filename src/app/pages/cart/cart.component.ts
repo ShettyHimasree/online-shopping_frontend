@@ -81,5 +81,4 @@ export class CartComponent implements OnInit {
 
   // For *ngFor performance
   trackByItemId = (_: number, item: any) => item.id;
-}
-*/
+}*/
